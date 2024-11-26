@@ -10,8 +10,8 @@ class Coche:
         self.cilindrada=cilindrada
         self.kilometros=0
 
-        def actualizarkms(self, kms):
-            self.kilometros = self.kilometros + kms
+    def actualizarkms(self, kms):
+        self.kilometros = self.kilometros + kms
 
     global cont
 
@@ -28,8 +28,13 @@ def siguienteCoche():
     lblparMotorData.config(text=listaCoches[Coche.cont].parMotor)
     lblTraccionData.config(text=listaCoches[Coche.cont].traccion)
     lblCilindradaData.config(text=listaCoches[Coche.cont].cilindrada)
+    lblKmsData.config(text=listaCoches[Coche.cont].kilometros)
+    entSumarKms.delete(0)
+    entSumarKms.insert(0, "0")
     
-    
+def actualizarkms():
+    listaCoches[Coche.cont].actualizarkms(int(entSumarKms.get()))
+    lblKmsData.config(text=listaCoches[Coche.cont].kilometros)
 
 
 
@@ -82,8 +87,19 @@ lblCilindrada.grid(column="1", row="6")
 lblCilindradaData=tk.Label(frmInfoCoches, text=listaCoches[0].cilindrada)
 lblCilindradaData.grid(column="2", row="6")
 
-lblKilometros=tk.Label(frmInfoCoches, text="Kiómetros")
-lblKilometros.grid(column="1")
+lblKilometros=tk.Label(frmInfoCoches, text="Kiómetros:")
+lblKilometros.grid(column="1", row="7")
+lblKmsData = tk.Label(frmInfoCoches, text=listaCoches[0].kilometros)
+lblKmsData.grid(column="2", row="7")
+
+frmBotones=tk.Frame(window, padx=20, pady=20)
+frmBotones.pack()
+
+btnSumarKms = tk.Button(frmBotones, text="Añadir kms", command=actualizarkms)
+entSumarKms = tk.Entry(frmBotones, width=10)
+entSumarKms.insert(0, "0")
+btnSumarKms.grid(column="1", row="2")
+entSumarKms.grid(column="2", row="2")
 
 btnSiguenteCoche=tk.Button(window, text=("Siguiente"), command=siguienteCoche)
 btnSiguenteCoche.pack()
