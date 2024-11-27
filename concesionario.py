@@ -1,19 +1,8 @@
 import tkinter as tk 
 
-class Coche:
-    def __init__(self, modelo, cvs, precio, parMotor, traccion, cilindrada):
-        self.modelo=modelo
-        self.cvs=cvs
-        self.precio=precio
-        self.parMotor=parMotor
-        self.traccion=traccion
-        self.cilindrada=cilindrada
-        self.kilometros=0
-
-    def actualizarkms(self, kms):
-        self.kilometros = self.kilometros + kms
-
-    global cont
+from coche import Coche
+from coche import CocheElectrico
+from coche import CocheCombustible
 
 def siguienteCoche():
 
@@ -29,8 +18,7 @@ def siguienteCoche():
     lblTraccionData.config(text=listaCoches[Coche.cont].traccion)
     lblCilindradaData.config(text=listaCoches[Coche.cont].cilindrada)
     lblKmsData.config(text=listaCoches[Coche.cont].kilometros)
-    entSumarKms.delete(0)
-    entSumarKms.insert(0, "0")
+    entSumarKms.delete(0, tk.END)
     
 def actualizarkms():
     listaCoches[Coche.cont].actualizarkms(int(entSumarKms.get()))
@@ -38,14 +26,15 @@ def actualizarkms():
 
 
 
-coche1=Coche("daciaDuster", 135, 19000, 240, "Delantera", "I3")
-coche2=Coche("rangeRoverSV", 635, 237000, 800, "Total", "V8")
-coche3=Coche("mercedesAMGGt63S", 639, 228443, 900, "Total", "V8")
-coche4=Coche("renaultClio", 101, 17300, 170, "Delantera", "I3")
-coche5=Coche("cupraFormentor", 333, 56090, 420, "Total", "I4")
+coche1=CocheCombustible("daciaDuster", 135, 19000, 240, "Delantera", "I3")
+coche2=CocheCombustible("rangeRoverSV", 635, 237000, 800, "Total", "V8")
+coche3=CocheCombustible("mercedesAMGGt63S", 639, 228443, 900, "Total", "V8")
+coche4=CocheCombustible("renaultClio", 101, 17300, 170, "Delantera", "I3")
+coche5=CocheCombustible("cupraFormentor", 333, 56090, 420, "Total", "I4")
+coche6=CocheElectrico("teslaModelSPlaid", 1020, 107990, 1200, "Total", "Panasonic")
 Coche.cont=0
 
-listaCoches=[coche1, coche2, coche3, coche4, coche5]
+listaCoches=[coche1, coche2, coche3, coche4, coche5, coche6]
 
 window = tk.Tk()
 window.title("Mi concesionario")
@@ -82,10 +71,10 @@ lblTraccion.grid(column="1", row="5")
 lblTraccionData=tk.Label(frmInfoCoches, text=listaCoches[0].traccion)
 lblTraccionData.grid(column="2", row="5")
 
-lblCilindrada=tk.Label(frmInfoCoches, text="Cilindrada: ")
+"""lblCilindrada=tk.Label(frmInfoCoches, text="Cilindrada: ")
 lblCilindrada.grid(column="1", row="6")
 lblCilindradaData=tk.Label(frmInfoCoches, text=listaCoches[0].cilindrada)
-lblCilindradaData.grid(column="2", row="6")
+lblCilindradaData.grid(column="2", row="6")"""
 
 lblKilometros=tk.Label(frmInfoCoches, text="Kiómetros:")
 lblKilometros.grid(column="1", row="7")
